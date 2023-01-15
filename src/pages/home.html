@@ -1,14 +1,109 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../public/css/index.css" />
-  </head>
-  <body>
-    <h1 id="hello"></h1>
-    <h2 id="world"></h2>
-    <script src="../public/js/home.js"></script>
-  </body>
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="../public/css/index.css" />
+  <link rel="stylesheet" href="../public/css/home.css" />
+</head>
+
+<body>
+
+  <!-- window bar -->
+
+  <header id="titlebar" onmousedown='return false;' onselectstart='return false;'>
+
+    <div id="drag-region">
+
+      <div id="window-controls">
+
+        <div id="controls">
+
+          <div id="closed">
+            <img class="icon_bar" srcset="../public/icon/closed.png" draggable="false" />
+          </div>
+
+          <div id="minimizable">
+            <img class="icon_bar" srcset="../public/icon/minimizable.png" draggable="false" />
+          </div>
+
+          <div id="minimize">
+            <img class="icon_bar" srcset="../public/icon/minimize.png" draggable="false" />
+          </div>
+
+        </div>
+
+        <div id="dark">
+          <img class="icon_dark" srcset="../public/icon/sun.png" draggable="false" />
+        </div>
+
+      </div>
+
+    </div>
+
+  </header>
+
+  <!-- body -->
+
+  <div class="Content">
+
+    <div class="menu">
+
+      <ul class="menu_ul">
+
+        <li>القائمة رقم 1</li>
+
+        <li>القائمة رقم 2</li>
+
+        <li>القائمة رقم 3</li>
+
+        <li>القائمة رقم 4</li>
+
+        <li>القائمة رقم 5</li>
+
+        <li>القائمة رقم 6</li>
+
+      </ul>
+
+    </div>
+
+    <div class="main">
+
+      <div id="home">
+        <h1 id="hello"></h1>
+        <h2 id="world"></h2>
+
+        <h1 id="titel">مقال تجريبي</h1> <br>
+
+        <h1 id="kk">
+
+          الخلاصة عبارة عن مجموعة من المحتوى يمكنك تصفّحها. يظهر المحتوى في قوالب متشابهة تتكرر واحدًا تلو الآخر. على
+          سبيل المثال، يمكن أن تكون الخلاصة تحريرية (مثل قائمة المقالات أو قائمة الأخبار) أو خلاصة بيانات (مثل قائمة
+          المنتجات أو قائمة الخدمات أو غيرها). يمكن أن تظهر الخلاصات في أي جزء من الصفحة. ملاحظة: لغرض الإعلانات المدمجة
+          داخل الخلاصة، لا تشير الخلاصة إلى خلاصة مشاركة الويب مثل RSS.
+
+          تتضمن بعض الأمثلة على الخلاصات ما يلي:
+
+          الخلاصة الرئيسية في الصفحة الرئيسية (مثل خلاصة الأخبار)
+          الخلاصة الرئيسية في صفحة نتائج الخدمات أو أحد المنتجات
+          الخلاصة الأفقية على الصفحة
+          الخلاصة النصية فقط
+
+          قد يكون لديك أحد المواقع الذي به خلاصة مختلفة على نسخة الجوال مقارنة بنسخة جهاز سطح المكتب. على سبيل المثال،
+          تنسيق الشبكة لكمبيوتر سطح المكتب الذي يتحول إلى خلاصة عند عرضه على الجوّال. في هذه الحال، يمكنك إنشاء إعلانات
+          منفصلة ضمن الخلاصة لمختلف أحجام الشاشة.
+
+        </h1>
+
+      </div>
+
+    </div>
+
+  </div>
+
+  <script src="../public/js/home.js"></script>
+</body>
+
 </html>

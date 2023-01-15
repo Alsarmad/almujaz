@@ -1,0 +1,39 @@
+{
+  "name": "almujaz",
+  "productName": "almujaz",
+  "version": "0.0.1",
+  "description": "Arabic RSS Reader",
+  "main": "src/index.js",
+  "scripts": {
+    "start": "electron-forge start",
+    "package": "electron-forge package",
+    "make": "electron-forge make",
+    "publish": "electron-forge publish",
+    "lint": "echo \"No linting configured\""
+  },
+  "keywords": [
+    "RSS",
+    "Reader",
+    "Alsarmad",
+    "Arabic"
+  ],
+  "author": {
+    "name": "Alsarmad",
+    "email": "52936496+kemzops@users.noreply.github.com"
+  },
+  "license": "GPL-3.0",
+  "dependencies": {
+    "electron-squirrel-startup": "^1.0.0",
+    "v8-compile-cache": "^2.3.0"
+  },
+  "devDependencies": {
+    "@electron-forge/cli": "^6.0.4",
+    "@electron-forge/maker-deb": "^6.0.4",
+    "@electron-forge/maker-rpm": "^6.0.4",
+    "@electron-forge/maker-squirrel": "^6.0.4",
+    "@electron-forge/maker-zip": "^6.0.4",
+    "@electron-forge/plugin-auto-unpack-natives": "^6.0.4",
+    "@electron-forge/publisher-github": "^6.0.4",
+    "electron": "22.0.2"
+  }
+}

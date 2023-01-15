@@ -5,11 +5,12 @@
   "description": "Arabic RSS Reader",
   "main": "src/index.js",
   "scripts": {
-    "start": "electron-forge start",
-    "package": "electron-forge package",
-    "make": "electron-forge make",
-    "publish": "electron-forge publish",
-    "lint": "echo \"No linting configured\""
+    "start": "electron src/index.js",
+    "packwin": "electron-builder --windows",
+    "packlinux": "electron-builder --linux",
+    "pack": "electron-builder --dir",
+    "dist": "electron-builder",
+    "dev": "nodemon --exec electron src/index.js"
   },
   "keywords": [
     "RSS",
@@ -23,17 +24,25 @@
   },
   "license": "GPL-3.0",
   "dependencies": {
-    "electron-squirrel-startup": "^1.0.0",
     "v8-compile-cache": "^2.3.0"
   },
   "devDependencies": {
-    "@electron-forge/cli": "^6.0.4",
-    "@electron-forge/maker-deb": "^6.0.4",
-    "@electron-forge/maker-rpm": "^6.0.4",
-    "@electron-forge/maker-squirrel": "^6.0.4",
-    "@electron-forge/maker-zip": "^6.0.4",
-    "@electron-forge/plugin-auto-unpack-natives": "^6.0.4",
-    "@electron-forge/publisher-github": "^6.0.4",
-    "electron": "22.0.2"
+    "electron": "^22.0.2",
+    "electron-builder": "^23.6.0",
+    "nodemon": "^2.0.20"
+  },
+  "build": {
+    "directories": {
+      "buildResources": "resources"
+    },
+    "productName": "Alsarmad",
+    "publish": {
+      "provider": "github",
+      "owner": "Alsarmad",
+      "repo": "almujaz",
+      "protocol": "https"
+    },
+    "appId": "org.alsarmad.almujaz",
+    "copyright": "Copyright © 2023 Alsarmad"
   }
 }

@@ -91,7 +91,7 @@ body {
 
 .menu {
   background-color: #232527;
-  width: 140px;
+  width: 180px;
   height: 100%;
   position: fixed;
   top: 0;
@@ -100,24 +100,44 @@ body {
 }
 
 .menu_ul {
-  margin-top: 40px;
+  margin-top: 0px;
   width: 100%;
   direction: rtl;
   list-style: none;
   text-align: center;
   font-family: 'Al_Jazeera', 'Greta_Arabic';
+  color: #ffffff;
 
 }
 
 .menu_ul li {
-  margin-top: 5px;
+  display: flex;
+  justify-content: space-evenly;
   margin-bottom: 5px;
   background-color: #181a1b;
+  padding: 5px;
+}
+
+.menu_icon{
+  display: block;
+  margin-top: auto;
+  margin-bottom: auto;
+  width: 18px;
+  height: 18px;
+}
+
+#menu_bottom {
+  padding: 0;
+  margin: 0 0 0 0;
+  width: 100%;
+  bottom: 0;
+  position: absolute;
+  z-index: 1;
 }
 
 .main {
   direction: rtl;
-  padding-right: 140px;
+  padding-right: 180px;
 }
 
 /* Custom Scrollbar */

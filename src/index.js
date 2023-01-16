@@ -7,7 +7,7 @@ const createWindow = () => {
   var mainWindow;
 
   mainWindow = new BrowserWindow({
-    width: 800,
+    width: 980,
     height: 600,
     center: true,
     show: false,
@@ -29,7 +29,7 @@ const createWindow = () => {
   });
   mainWindow.on('minimize', (event) => {
     event?.preventDefault();
-    mainWindow?.hide();
+    //mainWindow?.hide();
   });
   mainWindow?.on('closed', (event) => {
     event?.preventDefault();

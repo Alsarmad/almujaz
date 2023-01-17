@@ -25,6 +25,7 @@ body {
 #window-controls {
   display: flex;
   flex-wrap: wrap;
+  background-color: #2e3338;
   /* justify-content: space-between; */
   /* background-color: #232527; */
   position: fixed;

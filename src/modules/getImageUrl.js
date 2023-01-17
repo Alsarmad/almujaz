@@ -3,7 +3,7 @@ const { parse } = require('node-html-parser');
 /**
  * الحصول على الصور من محتوى الـ html
  * @param {String} content html
- * @return {Array<String>}
+ * @returns
  */
 
 module.exports = async function getImageUrl(content) {

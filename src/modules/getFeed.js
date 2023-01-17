@@ -1,4 +1,5 @@
 const { parse } = require('rss-to-json');
+const getImageUrl = require('./getImageUrl.js');
 
 module.exports = async function getFeed(appPath, options) {
 
@@ -10,7 +11,8 @@ module.exports = async function getFeed(appPath, options) {
             title: rss.title,
             description: rss.description,
             link: rss.link,
-            image: rss.image,
+            icon: rss.image,
+            image: await getImageUrl(rss.items[options.feedItem]?.description),
             category: rss.category,
             items: rss.items[options.feedItem]
         };

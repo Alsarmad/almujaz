@@ -3,11 +3,15 @@ const { app, BrowserWindow, ipcMain } = require('electron');
 const path = require('path');
 const IpcMain = require('./modules/ipcMain.js');
 const appInitialization = require('./modules/appInitialization.js');
+const CrateDate = require('./modules/CrateDate.js');
+const feed = require('./modules/feed.js');
 
 const appPath = path.join(app.getPath("appData"), "./Almujaz");
+CrateDate(appPath);
 appInitialization(appPath, app.getVersion());
+feed(appPath);
 
-const createWindow = () => {
+const createWindow = async () => {
 
   var mainWindow = new BrowserWindow({
     width: 980,
@@ -50,11 +54,11 @@ const createWindow = () => {
   IpcMain(ipcMain, mainWindow, appPath);
 };
 
-app.on('ready', (e) => {
+app.on('ready',async (e) => {
 
   e.preventDefault();
   app.setAppUserModelId("org.alsarmad.almujaz");
-  createWindow();
+  await createWindow();
   
 });
 

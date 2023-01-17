@@ -47,16 +47,13 @@ const createWindow = () => {
 
   // Communicate asynchronously from the main process to renderer processes.
 
-  IpcMain(ipcMain, mainWindow);
+  IpcMain(ipcMain, mainWindow, appPath);
 };
 
 app.on('ready', (e) => {
 
   e.preventDefault();
   app.setAppUserModelId("org.alsarmad.almujaz");
-
-  ipcMain.handle("appPath", async () => { return appPath });
-
   createWindow();
   
 });

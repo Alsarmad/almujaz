@@ -1,4 +1,4 @@
-module.exports = function IpcMain(ipcMain, mainWindow) {
+module.exports = function IpcMain(ipcMain, mainWindow, appPath) {
 
     ipcMain.on('closed', () => mainWindow?.close());
     ipcMain.on('minimizable', () => {
@@ -8,5 +8,5 @@ module.exports = function IpcMain(ipcMain, mainWindow) {
 
     });
     ipcMain.on('minimize', () => mainWindow?.minimize());
-
+    ipcMain.handle("appPath", async () => { return appPath });
 }

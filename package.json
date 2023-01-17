@@ -1,8 +1,8 @@
 {
   "name": "almujaz",
+  "version": "0.0.1",
   "productName": "almujaz",
   "homepage": "https://github.com/Alsarmad/almujaz",
-  "version": "0.0.1",
   "description": "Arabic RSS Reader",
   "main": "src/index.js",
   "scripts": {
@@ -26,8 +26,10 @@
   },
   "license": "GPL-3.0",
   "dependencies": {
+    "fs-extra": "^11.1.0",
     "node-html-parser": "^6.1.4",
     "rss-parser": "^3.12.0",
+    "rss-to-json": "^2.1.0",
     "v8-compile-cache": "^2.3.0"
   },
   "devDependencies": {

@@ -1,37 +1,22 @@
-const Parser = require('rss-parser');
-const getImageUrl = require('./getImageUrl.js');
+const { parse } = require('rss-to-json');
 
-/**
- * 
- * @param {Object} options
- * @returns 
- */
+module.exports = async function getFeed(appPath, options) {
 
-module.exports = async function getFeed(options) {
+    try {
 
-    // feed url (ex: https://christitus.com/categories/linux/index.xml/)
-    const feedUrl = options.feedUrl;
+        var rss = await parse(options.feedUrl);
 
-    // get specefic feed item by number
-    const feedItem = options.feedItem || 0;
-
-    const parser = await new Parser({ timed: 600000 }).parseURL(feedUrl)
-        .catch(e => { throw new Error(`The feed is not found from the ${feedUrl}`) });
-
-    return {
-        webUrl: parser?.link,
-        feedUrl: feedUrl,
-        webName: parser?.title,
-        title: parser?.items?.[feedItem]?.title,
-        fullcontent: parser?.items?.[feedItem]?.['content:encoded'],
-        content: parser?.items?.[feedItem]?.content,
-        link: parser?.items?.[feedItem]?.link,
-        author: parser?.items?.[feedItem]?.['dc:creator'] || parser?.items?.[feedItem]?.creator,
-        isoDate: parser?.items?.[feedItem]?.isoDate,
-        icon: parser?.image?.url,
-        language: parser?.language,
-        image: await getImageUrl(parser?.items?.[feedItem]?.['content:encoded']).catch(e => { throw new Error(`The images is not found from the ${feedUrl}`) }),
-        categories: parser?.items?.[feedItem]?.categories
+        return {
+            title: rss.title,
+            description: rss.description,
+            link: rss.link,
+            image: rss.image,
+            category: rss.category,
+            items: rss.items[options.feedItem]
+        };
+        
+    } catch(error) {
+        console.log(error);
+        return false;
     }
-
-}
+};

@@ -13,10 +13,12 @@ const home = require('./scripts/home.js');
 window.addEventListener('DOMContentLoaded', async (event) => {
   event.preventDefault();
   
+  const appPath = await ipcRenderer.invoke("appPath");
+
   /* MODULES LOAD */
   window_controls(ipcRenderer);
   dark();
 
   /* PAGES LOAD */
-  home(getFeed);
+  home(appPath, getFeed);
 });

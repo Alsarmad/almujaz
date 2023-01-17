@@ -93,13 +93,31 @@
 
       <div id="home">
 
-        <h1 id="feed-titel"></h1>
+        <input id="feedUrl" value="https://christitus.com/categories/linux/index.xml" type="url" placeholder="rss url">
+        <input id="feedItem" value="0" type="number" placeholder="feed item">
+        <button id="getFeed">getFeed</button>
         
         <br>
 
-        <h1 id="feed-content">
+        <a id="rss_link">
+          <h1 id="rss_title"></h1>
+        </a>
+        <h4 id="rss_description"></h4>
+        
+        <br>
 
-        </h1>
+        <div id="items">
+
+          <a id="item_link">
+            <h2 id="item_title"></h2>
+          </a>
+          <small id="item_createdAt"></small>
+
+          <br>
+
+          <div id="item_description"></div>
+
+        </div>
 
       </div>
 

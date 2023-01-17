@@ -2,6 +2,10 @@ require('v8-compile-cache');
 const { app, BrowserWindow, ipcMain } = require('electron');
 const path = require('path');
 const IpcMain = require('./modules/ipcMain.js');
+const appInitialization = require('./modules/appInitialization.js');
+
+const appPath = path.join(app.getPath("appData"), "./Almujaz");
+appInitialization(appPath, app.getVersion());
 
 const createWindow = () => {
 
@@ -50,6 +54,9 @@ app.on('ready', (e) => {
 
   e.preventDefault();
   app.setAppUserModelId("org.alsarmad.almujaz");
+
+  ipcMain.handle("appPath", async () => { return appPath });
+
   createWindow();
   
 });

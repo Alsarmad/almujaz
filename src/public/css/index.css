@@ -109,15 +109,23 @@ body {
   text-align: center;
   font-family: 'Al_Jazeera', 'Greta_Arabic';
   color: #ffffff;
-
 }
 
 .menu_ul li {
   display: flex;
   justify-content: space-evenly;
   margin-bottom: 5px;
-  background-color: #181a1b;
-  padding: 5px;
+  cursor: pointer;
+  -webkit-app-region: no-drag;
+}
+
+.menu_ul li:hover {
+  margin-left: 5px;
+}
+
+#menu_all_feed {
+  margin-bottom: 20px;
+  color: #c5c5c5;
 }
 
 .menu_icon {

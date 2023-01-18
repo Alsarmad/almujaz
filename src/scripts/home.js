@@ -16,8 +16,6 @@ module.exports = async function home(appPath) {
 
             for (const iterator of itemJson) {
 
-                // await new Promise(resolve => setTimeout(resolve, 1000));
-
                 let createLi = document.createElement("li");
                 let creatimg = document.createElement('img');
                 let creatp = document.createElement('p');
@@ -45,7 +43,7 @@ module.exports = async function home(appPath) {
                     allFeed.style.display = 'none';
                     viewFeed.style.display = 'block';
 
-                    viewFeed.innerHTML = Feedfind.items.description
+                    viewFeed.innerHTML = Feedfind.items.content ? Feedfind.items.content : Feedfind.items.description;
 
                     console.log(event.id);
 

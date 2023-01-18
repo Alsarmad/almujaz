@@ -27,6 +27,8 @@
   "license": "GPL-3.0",
   "dependencies": {
     "fs-extra": "^11.1.0",
+    "node-fetch": "^2.6.7",
+    "node-html-parser": "^6.1.4",
     "rss-to-json": "^2.1.0",
     "v8-compile-cache": "^2.3.0"
   },

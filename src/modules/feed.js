@@ -26,7 +26,7 @@ module.exports = async function feed(appPath) {
                         feedItem: iterator
                     });
 
-                    if (itemJson.some(e => e?.items?.link.includes(feed?.items?.link)) === false) {
+                    if (itemJson.some(e => e?.items?.link.includes(feed?.items?.link)) === false && feed?.items) {
 
                         itemJson.unshift(feed);
                         fs.writeJsonSync(path.join(appPath, `./Rss/${Hostname}.json`), itemJson, { spaces: '\t' });
@@ -44,7 +44,7 @@ module.exports = async function feed(appPath) {
                     feedItem: 0
                 });
 
-                if (itemJson.some(e => e?.items?.link.includes(feed?.items?.link)) === false) {
+                if (itemJson.some(e => e?.items?.link.includes(feed?.items?.link)) === false && feed?.items) {
 
                     itemJson.unshift(feed);
                     fs.writeJsonSync(path.join(appPath, `./Rss/${Hostname}.json`), itemJson, { spaces: '\t' });

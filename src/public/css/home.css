@@ -62,6 +62,18 @@
     display: none;
 }
 
+#viewFeed p {
+    font-size: 19px;
+}
+
+#viewFeed li {
+    font-size: 15px;
+}
+
+#viewFeed table {
+    font-size: 15px;
+}
+
 #viewFeed img{
     max-width: 100% ;
 }

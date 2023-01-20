@@ -47,6 +47,10 @@
             <img class="top_bar_icon" srcset="../public/icon/add.png" draggable="false" />
           </div>
 
+          <div id="Refresh" class="top_bar">
+            <img class="top_bar_icon" srcset="../public/icon/Refresh.png" draggable="false" />
+          </div>
+
         </div>
 
       </div>
@@ -63,7 +67,7 @@
 
       <ul class="menu_ul">
 
-        <li>
+        <li id="menu_all_feed">
           <img src="../public/icon/all.png" class="menu_icon">
           <p>
             جميع الخلاصات
@@ -91,33 +95,47 @@
 
     <div class="main">
 
-      <div id="home">
+      <div id="add_Content">
 
-        <input id="feedUrl" value="https://christitus.com/categories/linux/index.xml" type="url" placeholder="rss url">
-        <input id="feedItem" value="0" type="number" placeholder="feed item">
-        <button id="getFeed">getFeed</button>
-        
-        <br>
+        <div id="add_input">
 
-        <a id="rss_link">
-          <h1 id="rss_title"></h1>
-        </a>
-        <h4 id="rss_description"></h4>
-        
-        <br>
+          <div id="input_Content">
 
-        <div id="items">
+            <img src="../public/icon/closed.png" id="add_input_close">
 
-          <a id="item_link">
-            <h2 id="item_title"></h2>
-          </a>
-          <small id="item_createdAt"></small>
+            <p>قم بإضافة رابط الخلاصة</p>
 
-          <br>
+            <input type="url" placeholder="https://www.example.com/feed" id="add_input_url">
 
-          <div id="item_description"></div>
+            <p id="input_ok"></p>
+
+            <button id="input_button">إضافة</button>
+
+          </div>
 
         </div>
+
+      </div>
+
+      <!-- page -->
+
+      <div id="home">
+
+        <ul id="allFeed">
+
+          <!-- <li>
+            <img src="./filename.png" class="allFeed_image">
+            <p class="allFeed_title">عنوان المقال kkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk</p>
+          </li> -->
+
+        </ul>
+
+        <div id="viewFeed">
+
+
+        </div>
+
+
 
       </div>
 

@@ -1,33 +1,57 @@
+const fs = require('fs-extra');
+const path = require('path');
 
-module.exports = async function home(appPath, getFeed) {
+module.exports = async function home(appPath) {
 
-    if(document.getElementById("home")) {
-        document.getElementById("getFeed").addEventListener("click", async () => {
-            
-            // example rss
-            const feed = await getFeed(appPath, {
-                feedUrl: document.getElementById("feedUrl").value,
-                feedItem: document.getElementById("feedItem").value
-            });
+    if (document.getElementById("home")) {
 
-            // RSS
-            const rss_link = document.getElementById("rss_link");
-            const rss_title = document.getElementById("rss_title");
-            const rss_description = document.getElementById("rss_description");
-            rss_link.href = feed.link;
-            rss_title.innerHTML = feed.title;
-            rss_description.innerHTML = feed.description;
+        const feedUrlJson = fs.readJsonSync(path.join(appPath, "./feedUrl.json"));
+        const allFeed = document.getElementById('allFeed');
+        const viewFeed = document.getElementById('viewFeed');
 
-            // ITEMS (FEEDS)
-            const item_link = document.getElementById("item_link");
-            const item_title = document.getElementById("item_title");
-            const item_createdAt = document.getElementById("item_createdAt");
-            const item_description = document.getElementById("item_description");
-            item_link.href = feed.items.link;
-            item_title.innerHTML = feed.items.title;
-            item_createdAt.innerHTML = new Date(feed.items.published);
-            item_description.innerHTML = feed.items.description;
+        for (const item of feedUrlJson) {
 
-        });
+            let Hostname = new URL(item)?.hostname;
+            let itemJson = fs.readJsonSync(path.join(appPath, `./Rss/${Hostname}.json`));
+
+            for (const iterator of itemJson) {
+
+                let createLi = document.createElement("li");
+                let creatimg = document.createElement('img');
+                let creatp = document.createElement('p');
+
+                allFeed.appendChild(createLi);
+                createLi.id = iterator?.items?.title.replace(/ /g, '_');
+                createLi.className = 'allFeed_li'
+                createLi.appendChild(creatimg);
+                creatimg.src = iterator?.image?.length !== 0 ? iterator?.image?.[0] : '../public/icon/rss.png';
+                creatimg.className = 'allFeed_image';
+                createLi.appendChild(creatp);
+                creatp.innerText = iterator?.items?.title
+                creatp.className = 'allFeed_title'
+
+            }
+
+            const allFeed_li = document.getElementsByClassName('allFeed_li');
+
+            Array.from(allFeed_li).forEach((event, item) => {
+
+                document.getElementById(event.id).addEventListener('click', e => {
+
+                    const Feedfind = itemJson.find(e => e.items.title.replace(/ /g, '_') === event.id)
+
+                    allFeed.style.display = 'none';
+                    viewFeed.style.display = 'block';
+
+                    viewFeed.innerHTML = Feedfind.items.content ? Feedfind.items.content : Feedfind.items.description;
+
+                    console.log(event.id);
+
+                })
+            })
+
+        }
+
+
     }
 }

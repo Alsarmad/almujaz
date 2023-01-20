@@ -1,12 +1,15 @@
 const { parse } = require('node-html-parser');
+const fetch = require('node-fetch');
+
 
 /**
  * الحصول على الصور من محتوى الـ html
  * @param {String} content html
- * @return {Array<String>}
+ * @param {String} feedUrl url
+ * @returns
  */
 
-module.exports = async function getImageUrl(content) {
+module.exports = async function getImageUrl(content, feedUrl) {
 
     try {
 
@@ -23,16 +26,19 @@ module.exports = async function getImageUrl(content) {
             return array
         }
 
-        if (img?.length === 0 && Ogimg) {
+        else if (img?.length === 0 && Ogimg) {
 
             return [Ogimg?.getAttribute('content')]
         }
 
-
         else {
 
-            return content?.match(/<img [^>]*src="[^"]*"[^>]*>/gm)
-                ?.map(x => x?.replace(/.*src="([^"]*)".*/, '$1')) || []
+            let response = await fetch(feedUrl);
+            let text = await response?.text();
+
+            return text?.match(/<img [^>]*src="[^"]*"[^>]*>/gm)
+                ?.map(x => x?.replace(/.*src="([^"]*)".*/, '$1'))
+
         }
 
 

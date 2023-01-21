@@ -7,7 +7,7 @@ const fetchFeeds = require('./modules/feeds/fetchFeeds.js');
 
 const appPath = path.join(app.getPath("appData"), "./Almujaz");
 appInitialization(appPath, app.getVersion());
-fetchFeeds(appPath);
+fetchFeeds(appPath, 5000);
 
 const createWindow = async () => {
 

@@ -7,48 +7,36 @@ const fs = require('fs-extra');
 const path = require('path');
 const getFeed = require('./getFeeds.js');
 
-module.exports = async function feed(appPath) {
+module.exports = async function fetchFeeds(appPath, time) {
 
-    while (true) {
-
-        await new Promise(resolve => setTimeout(resolve, 1000));
+    setInterval(async () => {
         const feedUrlJson = fs.readJsonSync(path.join(appPath, "./feedUrl.json"));
 
         for (const item of feedUrlJson) {
+
             const rssFile = await fs.readJsonSync(path.join(appPath, "./rssMap.json"));
             const itemJson = fs.readJsonSync(path.join(appPath, `./Rss/${rssFile[item].rssID}.json`));
 
-            if (itemJson.length === 0) {
+            if (Object.keys(itemJson).length === 0) {
 
-                const Number = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+                let feed = await getFeed({
+                    feedUrl: item,
+                    feedAll: true
+                });
 
-                for (const iterator of Number) {
-
-                    await new Promise(resolve => setTimeout(resolve, 1000));
-                    let feed = await getFeed(appPath, {
-                        feedUrl: item,
-                        feedItem: iterator
-                    });
-
-                    if (itemJson.some(e => e?.items?.link.includes(feed?.items?.link)) === false && feed?.items) {
-
-                        itemJson.unshift(feed);
-                        fs.writeJsonSync(path.join(appPath, `./Rss/${rssFile[item].rssID}.json`), itemJson, { spaces: '\t' });
-
-                    }
-
-                }
+                fs.writeJsonSync(path.join(appPath, `./Rss/${rssFile[item].rssID}.json`), feed, { spaces: '\t' });
 
             } else {
 
-                let feed = await getFeed(appPath, {
+                let feed = await getFeed({
                     feedUrl: item,
-                    feedItem: 0
+                    feedItem: 0,
+                    feedAll: false
                 });
 
-                if (itemJson.some(e => e?.items?.link.includes(feed?.items?.link)) === false && feed?.items) {
+                if (itemJson.items.some(e => e?.link.includes(feed?.link)) === false) {
 
-                    itemJson.unshift(feed);
+                    itemJson.items.unshift(feed);
                     fs.writeJsonSync(path.join(appPath, `./Rss/${rssFile[item].rssID}.json`), itemJson, { spaces: '\t' });
 
                 }
@@ -56,6 +44,5 @@ module.exports = async function feed(appPath) {
             }
 
         }
-
-    }
+    }, time);
 }

@@ -3,6 +3,9 @@ const path = require('path');
 
 module.exports = (appPath, currentVersion) => {
 
+    fs.existsSync(path.join(appPath, "../Almujaz")) ? true : 
+        fs.mkdirsSync(path.join(appPath, '../Almujaz'), { recursive: true });
+
     fs.writeJsonSync(path.join(appPath, './version.json'), {
         currentVersion: currentVersion,
         alreadyChecked: false,

@@ -18,6 +18,6 @@ module.exports = async function generateRssFile(url, appPath) {
 
     rssMap[url] = { hostName: new URL(url).hostname, rssID: rssID };
     fs.writeFileSync(path.join(appPath, `./rssMap.json`), JSON.stringify(rssMap, null, 4))
-    fs.writeFileSync(path.join(appPath, `./Rss/${rssID}.json`), JSON.stringify([], null, 4));
+    fs.writeFileSync(path.join(appPath, `./Rss/${rssID}.json`), JSON.stringify({}, null, 4));
 
 };

@@ -8,11 +8,10 @@ module.exports = async function home(appPath) {
         const feedUrlJson = fs.readJsonSync(path.join(appPath, "./feedUrl.json"));
         const allFeed = document.getElementById('allFeed');
         const viewFeed = document.getElementById('viewFeed');
+        const rssFile = fs.readJsonSync(path.join(appPath, "./rssMap.json"));
 
         for (const item of feedUrlJson) {
-
-            let Hostname = new URL(item)?.hostname;
-            let itemJson = fs.readJsonSync(path.join(appPath, `./Rss/${Hostname}.json`));
+            let itemJson = fs.readJsonSync(path.join(appPath, `./Rss/${rssFile[item].rssID}.json`));
 
             for (const iterator of itemJson) {
 

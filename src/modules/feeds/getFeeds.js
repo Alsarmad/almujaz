@@ -19,9 +19,12 @@ module.exports = async function getFeed(appPath, options) {
         };
         
     } catch(error) {
+
         console.log(error);
         return false;
+        
     }
+
 };
 
 // "https://blog.rn0x.me/feed",

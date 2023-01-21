@@ -3,13 +3,11 @@ const { app, BrowserWindow, ipcMain } = require('electron');
 const path = require('path');
 const IpcMain = require('./modules/ipcMain.js');
 const appInitialization = require('./modules/appInitialization.js');
-const CrateDate = require('./modules/CrateDate.js');
-const feed = require('./modules/feed.js');
+const fetchFeeds = require('./modules/feeds/fetchFeeds.js');
 
 const appPath = path.join(app.getPath("appData"), "./Almujaz");
-CrateDate(appPath);
 appInitialization(appPath, app.getVersion());
-feed(appPath);
+fetchFeeds(appPath);
 
 const createWindow = async () => {
 

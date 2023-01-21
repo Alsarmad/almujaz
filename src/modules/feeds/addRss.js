@@ -1,6 +1,16 @@
 const fs = require('fs-extra');
 const path = require('path');
-const isUrl = require('./isUrl.js');
+const generateRssFile = require("./generateRssFile.js");
+
+function isUrl(str) {
+    var pattern = new RegExp('^(https?:\\/\\/)?' + // protocol
+        '((([a-z\\d]([a-z\\d-]*[a-z\\d])*)\\.)+[a-z]{2,}|' + // domain name
+        '((\\d{1,3}\\.){3}\\d{1,3}))' + // OR ip (v4) address
+        '(\\:\\d+)?(\\/[-a-z\\d%_.~+]*)*' + // port and path
+        '(\\?[;&a-z\\d%_.~+=-]*)?' + // query string
+        '(\\#[-a-z\\d_]*)?$', 'i'); // fragment locator
+    return !!pattern.test(str);
+}
 
 module.exports = function add_rss(appPath) {
 
@@ -22,28 +32,24 @@ module.exports = function add_rss(appPath) {
 
     input_button.addEventListener('click', async () => {
 
-        if (feedUrl) {
+        const feedUrlJson = fs.readJsonSync(path.join(appPath, "./feedUrl.json"));
+        let url = add_input_url.value;
+        let checkURL = url.replace(/^(https?:|)\/\//, '');
+        input_ok.style.display = 'block'
 
-            const feedUrlJson = fs.readJsonSync(path.join(appPath, "./feedUrl.json"));
-            const url = add_input_url.value;
-            input_ok.style.display = 'block'
+        if (isUrl(url)) {
 
-            if (isUrl(url)) {
+            try {
 
-                const Hostname = new URL(url)?.hostname;
-
-                if (feedUrlJson.includes(url) === false) {
+                if (!feedUrlJson.includes(url) && !feedUrlJson.includes("https://" + checkURL) && !feedUrlJson.includes("http://" + checkURL)) {
 
                     input_ok.style.color = '#1b7a07'
                     input_ok.innerText = 'تم إضافة الرابط'
                     add_input_url.value = ''
                     feedUrlJson.unshift(url);
                     fs.writeJsonSync(path.join(appPath, './feedUrl.json'), feedUrlJson, { spaces: '\t' });
-                    fs.writeJsonSync(path.join(appPath, `./Rss/${Hostname}.json`), [], { spaces: '\t' });
-
-                }
-
-                else {
+                    await generateRssFile(url, appPath);
+                } else {
 
                     input_ok.style.color = '#eb0000'
                     input_ok.innerText = 'الرابط موجود بالفعل'
@@ -51,19 +57,25 @@ module.exports = function add_rss(appPath) {
 
                 }
 
-            }
+            } catch (error) {
 
-            else {
                 input_ok.style.color = '#eb0000'
                 input_ok.innerText = 'قم بإدخال الرابط بشكل صحيح'
                 add_input_url.value = ''
+                console.log(error);
             }
 
-            setTimeout(() => {
-                input_ok.style.display = 'none'
-            }, 2000);
+        } else {
+
+            input_ok.style.color = '#eb0000'
+            input_ok.innerText = 'قم بإدخال الرابط بشكل صحيح'
+            add_input_url.value = ''
 
         }
+
+        setTimeout(() => {
+            input_ok.style.display = 'none'
+        }, 3500);
 
     });
 

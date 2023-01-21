@@ -1,7 +1,6 @@
 const { parse } = require('node-html-parser');
 const fetch = require('node-fetch');
 
-
 /**
  * الحصول على الصور من محتوى الـ html
  * @param {String} content html

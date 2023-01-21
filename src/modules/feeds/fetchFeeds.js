@@ -1,6 +1,11 @@
+/*
+    *  (EN) THIS FILE WILL MAKE PERFORMANCE ISSUES AND WILL BE CHANGED SOON
+    * (AR) هذا الملف سوف يسبب بمشاكل في الاداء سوف يتم تغييره قريبا
+*/
+
 const fs = require('fs-extra');
 const path = require('path');
-const getFeed = require('./getFeed.js');
+const getFeed = require('./getFeeds.js');
 
 module.exports = async function feed(appPath) {
 
@@ -10,9 +15,8 @@ module.exports = async function feed(appPath) {
         const feedUrlJson = fs.readJsonSync(path.join(appPath, "./feedUrl.json"));
 
         for (const item of feedUrlJson) {
-
-            const Hostname = new URL(item)?.hostname;
-            const itemJson = fs.readJsonSync(path.join(appPath, `./Rss/${Hostname}.json`));
+            const rssFile = await fs.readJsonSync(path.join(appPath, "./rssMap.json"));
+            const itemJson = fs.readJsonSync(path.join(appPath, `./Rss/${rssFile[item].rssID}.json`));
 
             if (itemJson.length === 0) {
 
@@ -29,15 +33,13 @@ module.exports = async function feed(appPath) {
                     if (itemJson.some(e => e?.items?.link.includes(feed?.items?.link)) === false && feed?.items) {
 
                         itemJson.unshift(feed);
-                        fs.writeJsonSync(path.join(appPath, `./Rss/${Hostname}.json`), itemJson, { spaces: '\t' });
+                        fs.writeJsonSync(path.join(appPath, `./Rss/${rssFile[item].rssID}.json`), itemJson, { spaces: '\t' });
 
                     }
 
                 }
 
-            }
-
-            else {
+            } else {
 
                 let feed = await getFeed(appPath, {
                     feedUrl: item,
@@ -47,7 +49,7 @@ module.exports = async function feed(appPath) {
                 if (itemJson.some(e => e?.items?.link.includes(feed?.items?.link)) === false && feed?.items) {
 
                     itemJson.unshift(feed);
-                    fs.writeJsonSync(path.join(appPath, `./Rss/${Hostname}.json`), itemJson, { spaces: '\t' });
+                    fs.writeJsonSync(path.join(appPath, `./Rss/${rssFile[item].rssID}.json`), itemJson, { spaces: '\t' });
 
                 }
 

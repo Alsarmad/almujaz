@@ -11,12 +11,13 @@ module.exports = async function getFeeds(options) {
 
             let Array = []
 
-            for (const iterator of rss.items) {
+            for (const iterator of rss?.items) {
 
 
-                Array.push({ 
-                    ...iterator, 
-                    image: await getImageUrl(iterator?.content || iterator?.description, rss.link) 
+                Array.push({
+                    feedId: Math.random().toString(36).substring(2),
+                    ...iterator,
+                    image: await getImageUrl(iterator?.content || iterator?.description, rss.link)
                 });
 
             }
@@ -34,8 +35,9 @@ module.exports = async function getFeeds(options) {
 
         else {
 
-            return { 
-                ...rss.items[options.feedItem], 
+            return {
+                feedId: Math.random().toString(36).substring(2),
+                ...rss.items[options.feedItem],
                 image: await getImageUrl(rss.items[options.feedItem]?.content || rss.items[options.feedItem]?.description, rss.link)
             }
 

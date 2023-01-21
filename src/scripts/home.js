@@ -43,7 +43,7 @@ module.exports = async function home(appPath) {
                     viewFeed.style.display = 'block';
 
                     viewFeed.innerHTML = Feedfind.content ? Feedfind.content : Feedfind.description;
-
+                    window.scrollTo({ top: 0 })
                     console.log(event.id);
 
                 })

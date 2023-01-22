@@ -6,59 +6,30 @@ module.exports = async function home(appPath) {
     if (document.getElementById("home")) {
 
         const feedUrlJson = fs.readJsonSync(path.join(appPath, "./feedUrl.json"));
-        const allFeed = document.getElementById('allFeed');
-        const viewFeed = document.getElementById('viewFeed');
+        const versionJson = fs.readJsonSync(path.join(appPath, "./version.json"));
+        const numberWebsite = document.getElementById('numberWebsite');
+        const numberFeeds = document.getElementById('numberFeeds');
+        const menu_home = document.getElementById('menu_home');
+        const almujaz_version = document.getElementById('almujaz_version');
         const rssFile = fs.readJsonSync(path.join(appPath, "./rssMap.json"));
+        let arr = []
 
-        for (const item of feedUrlJson) {
+        numberWebsite.innerText = feedUrlJson.length;
 
+        for (let item of feedUrlJson) {
             let itemJson = fs.readJsonSync(path.join(appPath, `./Rss/${rssFile[item].rssID}.json`));
-
-            for (const iterator of itemJson?.items) {
-
-                let createLi = document.createElement("li");
-                let creatimg = document.createElement('img');
-                let creatp = document.createElement('p');
-
-                allFeed.appendChild(createLi);
-                createLi.id = iterator?.feedId;
-                createLi.className = 'allFeed_li'
-                createLi.appendChild(creatimg);
-                creatimg.src = iterator?.image && iterator?.image?.[0]?.includes('http') && iterator?.image?.length !== 0 ? iterator?.image?.[0] : '../public/icon/rss.png';
-                creatimg.className = 'allFeed_image';
-                createLi.appendChild(creatp);
-                creatp.innerText = iterator?.title
-                creatp.className = 'allFeed_title'
-
-            }
-
-            allFeed.style.display = 'flex'
-
-            const allFeed_li = document.getElementsByClassName('allFeed_li');
-
-            Array.from(allFeed_li).forEach((event, item) => {
-
-                document.getElementById(event.id).addEventListener('click', e => {
-
-                    for (const Feedfind of itemJson.items) {
-
-                        if (Feedfind.feedId === event.id) {
-
-                            allFeed.style.display = 'none';
-                            viewFeed.style.display = 'block';
-
-                            viewFeed.innerHTML = Feedfind?.content ? Feedfind.content : Feedfind.description;
-                            window.scrollTo({ top: 0 })
-                            console.log(event.id);
-
-                        }
-
-                    }
-                })
-            })
-
+            arr.push(itemJson?.items?.length)
         }
 
+        numberFeeds.innerText = arr.length !== 0 ? arr.reduce((a, b) => {
+            return a + b;
+        }) : 0
 
+
+        menu_home.addEventListener('click', e => {
+            window.location.href = './home.html'
+        });
+
+        almujaz_version.innerText = `v${versionJson.currentVersion}`
     }
 }

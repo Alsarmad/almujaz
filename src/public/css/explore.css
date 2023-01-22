@@ -1,0 +1,20 @@
+#menu_explore {
+    width: 95%;
+    margin-right: 5px;
+    background-color: #2b294a;
+}
+
+#menu_explore>.menu_left {
+    background-image: url(../icon/left.png);
+    background-size: 10px;
+    width: 10px;
+    height: 10px;
+}
+
+#explore_page {
+    text-align: center;
+    font-family: 'Al_Jazeera';
+    font-size: 10px;
+    padding: 20px;
+    color: #fff;
+}

@@ -9,7 +9,6 @@ module.exports = async function home(appPath) {
         const versionJson = fs.readJsonSync(path.join(appPath, "./version.json"));
         const numberWebsite = document.getElementById('numberWebsite');
         const numberFeeds = document.getElementById('numberFeeds');
-        const menu_home = document.getElementById('menu_home');
         const almujaz_version = document.getElementById('almujaz_version');
         const rssFile = fs.readJsonSync(path.join(appPath, "./rssMap.json"));
         let arr = []
@@ -29,10 +28,6 @@ module.exports = async function home(appPath) {
             return a + b;
         }) : 0
 
-
-        menu_home.addEventListener('click', e => {
-            window.location.href = './home.html'
-        });
 
         almujaz_version.innerText = `v${versionJson.currentVersion}`
     }

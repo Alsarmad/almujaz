@@ -10,7 +10,7 @@
 
 html,
 body {
-  background-color: #2e3338;
+  background-color: #423965;
   margin: 0px 0px 0px 0px;
   max-height: 100%;
 }
@@ -25,9 +25,9 @@ body {
 #window-controls {
   display: flex;
   flex-wrap: wrap;
-  background-color: #2e3338;
+  background-color: #423965;
   /* justify-content: space-between; */
-  /* background-color: #232527; */
+  /* background-color: #383058; */
   position: fixed;
   width: 100%;
   z-index: 2;
@@ -78,7 +78,7 @@ body {
 #minimizable:hover,
 #minimize:hover,
 .top_bar:hover {
-  background-color: #272b30;
+  background-color: #383058;
   transition: 0.3s ease-in-out;
 }
 
@@ -92,7 +92,7 @@ body {
 } */
 
 .menu {
-  background-color: #232527;
+  background-color: #383058;
   width: 180px;
   height: 100%;
   position: fixed;
@@ -102,7 +102,7 @@ body {
 }
 
 .menu_ul {
-  margin-top: 0px;
+  margin-top: 15px;
   width: 100%;
   direction: rtl;
   list-style: none;
@@ -112,38 +112,53 @@ body {
 }
 
 .menu_ul li {
+  width: 70%;
   display: flex;
-  justify-content: space-evenly;
+  justify-content: right;
+  align-items: center;
   margin-bottom: 5px;
+  margin-left: auto;
+  margin-right: auto;
   cursor: pointer;
   -webkit-app-region: no-drag;
+  font-size: 13px;
+  padding: 8px;
+}
+
+.menu_ul li p {
+  margin: 0 0 0 0;
 }
 
 .menu_ul li:hover {
-  margin-left: 5px;
+  background-color: #423965;
+  border-radius: 10px;
+  
 }
 
-#menu_all_feed {
-  margin-bottom: 20px;
-  color: #c5c5c5;
+#menu_home {
+  background-color: #423965;
+  border-radius: 10px;
 }
 
 .menu_icon {
-  display: block;
-  margin-top: auto;
-  margin-bottom: auto;
-  width: 18px;
-  height: 18px;
+  margin-left: 10px;
+  width: 15px;
+  height: 15px;
 }
 
 #menu_bottom {
-  padding: 0;
-  margin: 0 0 0 0;
-  width: 100%;
+  justify-content: center;
+  width: 70%;
   bottom: 0;
   position: absolute;
+  left: 0;
+  right: 0;
   z-index: 1;
 }
+
+/* #menu_bottom:hover{
+  background-color: #00000000;
+} */
 
 .main {
   direction: rtl;
@@ -241,21 +256,21 @@ body {
 /* Custom Scrollbar */
 
 ::-webkit-scrollbar {
-  width: 8px;
+  width: 10px;
   -webkit-app-region: no-drag;
 }
 
 
 ::-webkit-scrollbar-track {
-  background-color: #232527;
+  background-color: #383058;
   -webkit-app-region: no-drag;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #2f3335;
+  background: #423965;
   -webkit-app-region: no-drag;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #181a1b;
+  background: #332a52;
 }

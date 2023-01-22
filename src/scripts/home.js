@@ -18,7 +18,11 @@ module.exports = async function home(appPath) {
 
         for (let item of feedUrlJson) {
             let itemJson = fs.readJsonSync(path.join(appPath, `./Rss/${rssFile[item].rssID}.json`));
-            arr.push(itemJson?.items?.length)
+            if (Object.keys(itemJson).length !== 0) {
+
+                arr.push(itemJson?.items?.length)
+
+            }
         }
 
         numberFeeds.innerText = arr.length !== 0 ? arr.reduce((a, b) => {

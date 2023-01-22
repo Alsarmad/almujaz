@@ -8,8 +8,7 @@ module.exports = async function fetchFeeds(appPath) {
 
     for (const item of feedUrlJson) {
 
-        const rssFile = await fs.readJsonSync(path.join(appPath, "./rssMap.json"));
-        const itemJson = fs.readJsonSync(path.join(appPath, `./Rss/${rssFile[item].rssID}.json`));
+        const rssFile = fs.readJsonSync(path.join(appPath, "./rssMap.json"));
         const feed = await getFeed({
             feedUrl: item,
             feedAll: true

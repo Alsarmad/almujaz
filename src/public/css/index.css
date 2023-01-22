@@ -135,6 +135,7 @@ body {
   font-size: 13px;
   padding: 8px;
   border-radius: 10px;
+  transition: 0.5s ease-in-out;
 }
 
 .menu_ul li p {
@@ -145,6 +146,7 @@ body {
   width: 95%;
   margin-right: 5px;
   background-color: #2b294a;
+  transition: 0.5s ease-in-out;
 }
 
 .menu_ul li:hover>.menu_left {

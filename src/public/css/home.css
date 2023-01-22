@@ -43,11 +43,13 @@
     padding: 15px;
     background-color: #2b294a;
     border-radius: 10px;
+    transition: 0.5s ease-in-out;
 }
 
 #info_feeds li:hover {
     background-color: #312a4d;
     box-shadow: rgba(0, 0, 0, 0.219) 0px 25px 20px -20px;
+    transition: 0.5s ease-in-out;
 }
 
 #info_feeds li>p {

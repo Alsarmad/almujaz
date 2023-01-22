@@ -1,6 +1,7 @@
 const fs = require('fs-extra');
 const path = require('path');
 const generateRssFile = require("./generateRssFile.js");
+const fetchFeeds = require('./fetchFeeds.js');
 
 function isUrl(str) {
     var pattern = new RegExp('^(https?:\\/\\/)?' + // protocol
@@ -49,6 +50,7 @@ module.exports = function add_rss(appPath) {
                     feedUrlJson.unshift(url);
                     fs.writeJsonSync(path.join(appPath, './feedUrl.json'), feedUrlJson, { spaces: '\t' });
                     await generateRssFile(url, appPath);
+                    await fetchFeeds(appPath);
                 } else {
 
                     input_ok.style.color = '#eb0000'

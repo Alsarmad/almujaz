@@ -4,6 +4,7 @@ const { ipcRenderer, shell } = require('electron');
 /* MODULES */
 const dark = require('./modules/dark.js');
 const addRss = require('./modules/feeds/addRss.js');
+const fetchFeeds = require('./modules/feeds/fetchFeeds.js');
 
 /* PAGES PRELOAD SCRIPT */
 const home = require('./scripts/home.js');
@@ -18,7 +19,10 @@ window.addEventListener('DOMContentLoaded', async (event) => {
   document.getElementById('closed').addEventListener('click', e => ipcRenderer.send('closed'));
   document.getElementById('minimizable').addEventListener('click', e => ipcRenderer.send('minimizable'));
   document.getElementById('minimize').addEventListener('click', e => ipcRenderer.send('minimize'));
-  document.getElementById('Refresh').addEventListener('click', e => document.location.reload());
+  document.getElementById('Refresh').addEventListener('click',async e => {
+    await fetchFeeds(appPath);
+    document.location.reload();
+  });
 
   /* MODULES LOAD */
   dark();

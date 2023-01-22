@@ -3,11 +3,9 @@ const { app, BrowserWindow, ipcMain } = require('electron');
 const path = require('path');
 const IpcMain = require('./modules/ipcMain.js');
 const appInitialization = require('./modules/appInitialization.js');
-const fetchFeeds = require('./modules/feeds/fetchFeeds.js');
 
 const appPath = path.join(app.getPath("appData"), "./Almujaz");
 appInitialization(appPath, app.getVersion());
-fetchFeeds(appPath, 5000);
 
 const createWindow = async () => {
 

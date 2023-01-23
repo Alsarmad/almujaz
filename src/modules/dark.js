@@ -7,7 +7,7 @@ module.exports = function dark() {
         let icon_dark = document.getElementById('icon_dark');
         let mod = 'dark'
 
-        dark.addEventListener('click', (e)=> {
+        dark.addEventListener('click', (e) => {
 
             if (mod === 'dark') {
                 icon_dark.srcset = "../public/icon/moon.png"
@@ -18,7 +18,7 @@ module.exports = function dark() {
                 mod = 'dark'
             }
         });
-        
+
     }
-    
+
 }

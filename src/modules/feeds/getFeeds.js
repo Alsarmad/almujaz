@@ -1,7 +1,7 @@
 const { parse } = require('rss-to-json');
 const getImageUrl = require('./getImageUrl.js');
 
-module.exports = async function getFeeds(options) {
+module.exports = async (options) => {
 
     try {
 
@@ -11,7 +11,7 @@ module.exports = async function getFeeds(options) {
 
             let Array = []
 
-            for (const iterator of rss?.items) {
+            for (let iterator of rss?.items) {
 
 
                 Array.push({
@@ -52,5 +52,3 @@ module.exports = async function getFeeds(options) {
     }
 
 };
-
-// "https://blog.rn0x.me/feed",

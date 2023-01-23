@@ -1,34 +1,30 @@
-const fs = require('fs-extra');
-const path = require('path');
+module.exports = async (appPath, fs, path) => {
 
-module.exports = async function home(appPath) {
+    const feedUrlJson = fs.readJsonSync(path.join(appPath, "./feedUrl.json"));
+    const versionJson = fs.readJsonSync(path.join(appPath, "./version.json"));
+    const rssFile = fs.readJsonSync(path.join(appPath, "./rssMap.json"));
 
-    if (document.getElementById("home")) {
+    let numberWebsite = document.getElementById('numberWebsite');
+    let numberFeeds = document.getElementById('numberFeeds');
+    let almujaz_version = document.getElementById('almujaz_version');
+    let arr = []
 
-        const feedUrlJson = fs.readJsonSync(path.join(appPath, "./feedUrl.json"));
-        const versionJson = fs.readJsonSync(path.join(appPath, "./version.json"));
-        const numberWebsite = document.getElementById('numberWebsite');
-        const numberFeeds = document.getElementById('numberFeeds');
-        const almujaz_version = document.getElementById('almujaz_version');
-        const rssFile = fs.readJsonSync(path.join(appPath, "./rssMap.json"));
-        let arr = []
+    numberWebsite.innerText = feedUrlJson.length;
 
-        numberWebsite.innerText = feedUrlJson.length;
+    for (let item of feedUrlJson) {
+        let itemJson = fs.readJsonSync(path.join(appPath, `./Rss/${rssFile[item].rssID}.json`));
+        if (Object.keys(itemJson).length !== 0) {
 
-        for (let item of feedUrlJson) {
-            let itemJson = fs.readJsonSync(path.join(appPath, `./Rss/${rssFile[item].rssID}.json`));
-            if (Object.keys(itemJson).length !== 0) {
+            arr.push(itemJson?.items?.length)
 
-                arr.push(itemJson?.items?.length)
-
-            }
         }
-
-        numberFeeds.innerText = arr.length !== 0 ? arr.reduce((a, b) => {
-            return a + b;
-        }) : 0
-
-
-        almujaz_version.innerText = `v${versionJson.currentVersion}`
     }
-}
+
+    numberFeeds.innerText = arr.length !== 0 ? arr.reduce((a, b) => {
+        return a + b;
+    }) : 0
+
+
+    almujaz_version.innerText = `v${versionJson.currentVersion}`
+
+};

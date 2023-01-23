@@ -1,14 +1,15 @@
-require('v8-compile-cache');
-const { app, BrowserWindow, ipcMain } = require('electron');
-const path = require('path');
-const IpcMain = require('./modules/ipcMain.js');
-const appInitialization = require('./modules/appInitialization.js');
+require("v8-compile-cache");
+const { app, BrowserWindow, ipcMain } = require("electron");
+const path = require("path");
+const IpcMain = require("./modules/ipcMain.js");
+const appInitialization = require("./modules/appInitialization.js");
 
-const appPath = path.join(app.getPath("appData"), "./Almujaz");
-appInitialization(appPath, app.getVersion());
+appInitialization(
+  path.join(app.getPath("appData"), "./Almujaz"),
+  app.getVersion()
+);
 
 const createWindow = async () => {
-
   var mainWindow = new BrowserWindow({
     width: 980,
     height: 600,
@@ -20,51 +21,49 @@ const createWindow = async () => {
     webPreferences: {
       nodeIntegration: true,
       sandbox: false,
-      preload: path.join(__dirname, 'preload.js'),
+      preload: path.join(__dirname, "preload.js"),
     },
   });
 
-  mainWindow.loadFile(path.join(__dirname, 'pages/home.html'));
+  mainWindow.loadFile(path.join(__dirname, "pages/home.html"));
 
   mainWindow.webContents.openDevTools();
 
   //mainWindow.removeMenu();
 
-  mainWindow.once('ready-to-show', () => {
+  mainWindow.once("ready-to-show", () => {
     mainWindow?.show();
   });
 
-  mainWindow.on('minimize', (event) => {
+  mainWindow.on("minimize", (event) => {
     event?.preventDefault();
     //mainWindow?.hide();
   });
 
-  mainWindow?.on('closed', (event) => {
+  mainWindow?.on("closed", (event) => {
     event?.preventDefault();
-    mainWindow = null
+    mainWindow = null;
     app?.quit();
   });
 
   // Communicate asynchronously from the main process to renderer processes.
 
-  IpcMain(ipcMain, mainWindow, appPath);
+  IpcMain(ipcMain, mainWindow, path.join(app.getPath("appData"), "./Almujaz"));
 };
 
-app.on('ready',async (e) => {
-
+app.on("ready", async (e) => {
   e.preventDefault();
   app.setAppUserModelId("org.alsarmad.almujaz");
   await createWindow();
-  
 });
 
-app.on('window-all-closed', () => {
-  if (process.platform !== 'darwin') {
+app.on("window-all-closed", () => {
+  if (process.platform !== "darwin") {
     app.quit();
   }
 });
 
-app.on('activate', () => {
+app.on("activate", () => {
   if (BrowserWindow.getAllWindows().length === 0) {
     createWindow();
   }

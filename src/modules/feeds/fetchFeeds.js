@@ -1,15 +1,13 @@
-const fs = require('fs-extra');
-const path = require('path');
 const getFeed = require('./getFeeds.js');
 
-module.exports = async function fetchFeeds(appPath) {
+module.exports = async function fetchFeeds(appPath, fs, path) {
 
     const feedUrlJson = fs.readJsonSync(path.join(appPath, "./feedUrl.json"));
 
-    for (const item of feedUrlJson) {
+    for (let item of feedUrlJson) {
 
         const rssFile = fs.readJsonSync(path.join(appPath, "./rssMap.json"));
-        const feed = await getFeed({
+        let feed = await getFeed({
             feedUrl: item,
             feedAll: true
         });

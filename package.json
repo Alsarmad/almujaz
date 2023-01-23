@@ -1,9 +1,9 @@
 {
   "name": "almujaz",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "productName": "almujaz",
   "homepage": "https://github.com/Alsarmad/almujaz",
-  "description": "Arabic RSS Reader",
+  "description": "Arabic Free & Open Source RSS Reader",
   "main": "src/index.js",
   "scripts": {
     "start": "electron src/index.js",
@@ -17,7 +17,8 @@
     "RSS",
     "Reader",
     "Alsarmad",
-    "Arabic"
+    "Arabic",
+    "Almujaz"
   ],
   "author": {
     "name": "Alsarmad",

@@ -1,14 +1,7 @@
 const { parse } = require('node-html-parser');
 const fetch = require('node-fetch');
 
-/**
- * الحصول على الصور من محتوى الـ html
- * @param {String} content html
- * @param {String} feedUrl url
- * @returns
- */
-
-module.exports = async function getImageUrl(content, feedUrl) {
+module.exports = async (content, feedUrl) => {
 
     try {
 

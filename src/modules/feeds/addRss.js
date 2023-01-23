@@ -1,9 +1,7 @@
-const fs = require('fs-extra');
-const path = require('path');
 const generateRssFile = require("./generateRssFile.js");
 const fetchFeeds = require('./fetchFeeds.js');
 
-function isUrl(str) {
+const isUrl = (str) => {
     var pattern = new RegExp('^(https?:\\/\\/)?' + // protocol
         '((([a-z\\d]([a-z\\d-]*[a-z\\d])*)\\.)+[a-z]{2,}|' + // domain name
         '((\\d{1,3}\\.){3}\\d{1,3}))' + // OR ip (v4) address
@@ -13,21 +11,22 @@ function isUrl(str) {
     return !!pattern.test(str);
 }
 
-module.exports = function add_rss(appPath) {
+module.exports = async (appPath, fs, path) => {
 
     const feedUrl = fs.existsSync(path.join(appPath, "./feedUrl.json"));
-    const add = document.getElementById('add');
-    const add_Content = document.getElementById('add_Content');
-    const add_input_close = document.getElementById('add_input_close');
-    const input_button = document.getElementById('input_button');
-    const input_ok = document.getElementById('input_ok');
-    const add_input_url = document.getElementById('add_input_url');
 
-    add.addEventListener('click', async () => {
+    let add = document.getElementById('add');
+    let add_Content = document.getElementById('add_Content');
+    let add_input_close = document.getElementById('add_input_close');
+    let input_button = document.getElementById('input_button');
+    let input_ok = document.getElementById('input_ok');
+    let add_input_url = document.getElementById('add_input_url');
+
+    add.addEventListener('click', () => {
         add_Content.style.display = 'block'
     });
 
-    add_input_close.addEventListener('click', async () => {
+    add_input_close.addEventListener('click', () => {
         add_Content.style.display = 'none'
     });
 
@@ -50,7 +49,7 @@ module.exports = function add_rss(appPath) {
                     feedUrlJson.unshift(url);
                     fs.writeJsonSync(path.join(appPath, './feedUrl.json'), feedUrlJson, { spaces: '\t' });
                     await generateRssFile(url, appPath);
-                    await fetchFeeds(appPath);
+                    await fetchFeeds(appPath, fs, path);
                 } else {
 
                     input_ok.style.color = '#eb0000'

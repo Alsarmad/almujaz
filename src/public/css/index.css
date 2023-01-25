@@ -48,8 +48,7 @@ body {
   display: flex;
 }
 
-.icon_bar,
-.top_bar_icon {
+.icon_bar {
   display: block;
   margin-top: auto;
   margin-bottom: auto;
@@ -179,6 +178,15 @@ body {
   z-index: 1;
   background-color: #2b294a;
   margin-bottom: 15px;
+}
+
+.menu_bottom_icon {
+  display: block;
+  margin-left: 5px;
+  margin-right: 5px;
+  width: 18px;
+  height: 18px;
+  padding: 5px;
 }
 
 #menu_bottom:hover{

@@ -35,15 +35,6 @@ body {
   cursor: pointer;
 }
 
-#break {
-  color: #ffffff;
-  font-size: 22px;
-  margin-top: 5px;
-  margin-bottom: 0px;
-  margin-left: 10px;
-  margin-right: 10px;
-}
-
 #controls {
   display: flex;
 }
